@@ -5,7 +5,6 @@ const Router = express.Router();
 const {
     getUsers
     , postUser
-    , getUserById
     , editUserById
     , deleteUserById
 } = require("../controllers/userController");
@@ -22,10 +21,5 @@ Router.route("/users")
     .post(postUserValidator, runValidator, postUser)
     .put(editUserByIdValidator, runValidator, editUserById)
     .delete(deleteUserByIdValidator, runValidator, deleteUserById);
-
-// Router.route("/users/:id")
-//     .get(getUserById)
-//     .patch(editUserByIdValidator, runValidator, editUserById)
-//     .delete(deleteUserByIdValidator, runValidator, deleteUserById);
 
 module.exports = Router;
