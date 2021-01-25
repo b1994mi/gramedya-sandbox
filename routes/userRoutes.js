@@ -19,11 +19,13 @@ const { runValidator
 
 Router.route("/users")
     .get(getUsers)
-    .post(postUserValidator, runValidator, postUser);
-
-Router.route("/users/:id")
-    .get(getUserById)
-    .patch(editUserByIdValidator, runValidator, editUserById)
+    .post(postUserValidator, runValidator, postUser)
+    .put(editUserByIdValidator, runValidator, editUserById)
     .delete(deleteUserByIdValidator, runValidator, deleteUserById);
+
+// Router.route("/users/:id")
+//     .get(getUserById)
+//     .patch(editUserByIdValidator, runValidator, editUserById)
+//     .delete(deleteUserByIdValidator, runValidator, deleteUserById);
 
 module.exports = Router;

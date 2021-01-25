@@ -4,7 +4,7 @@ const { users, books } = require('../models')
 exports.getUsers = async (req, res) => {
     try {
         const data = await users.findAll({
-            include: { model: books }
+            // include: { model: books }
         });
         return res.json(success({
             message: "data berhasil diterima", data
@@ -53,10 +53,10 @@ exports.getUserById = async (req, res) => {
 
 exports.editUserById = async (req, res) => {
     try {
-        const where = { where: { id: req.params.id } };
+        const where = { where: { id: req.body.id } };
         const data = await users.update(req.body, where);
         return res.json(
-            success({ message: `Berhasil ubah User ID ${req.params.id}`, data })
+            success({ message: `Berhasil ubah User ID ${req.body.id}`, data })
         );
     } catch (error) {
         return res.json(
@@ -67,10 +67,10 @@ exports.editUserById = async (req, res) => {
 
 exports.deleteUserById = async (req, res) => {
     try {
-        const where = { where: { id: req.params.id } };
+        const where = { where: { id: req.body.id } };
         const data = await users.destroy(where);
         return res.json(
-            success({ message: `Berhasil hapus User ID ${req.params.id}`, data })
+            success({ message: `Berhasil hapus User ID ${req.body.id}`, data })
         );
     } catch (error) {
         return res.json(
