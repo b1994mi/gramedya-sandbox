@@ -14,16 +14,15 @@ exports.runValidator = (req, res, next) => {
 }
 
 exports.postUserValidator = [
-    body("name")
-        .notEmpty()
-        .withMessage("name harus terisi")
-        .custom(async (value) => {
-            const user = await users.findOne({ where: { name: value } });
-            return user ? Promise.reject("name sudah digunakan") : '';
-        })
+    body("id", "User ID akan auto increment!").isEmpty()
+    , body("name", "name harus terisi").notEmpty()
     , body("address", "address harus terisi").notEmpty()
-    , body("phone", "phone harus terisi").notEmpty()
     , body("gender", "gender harus 'M' atau 'F'").isIn(["M", "F"])
+    , body("phone", "phone harus terisi").notEmpty()
+        .custom(async (value) => {
+            const user = await users.findOne({ where: { phone: value } });
+            return user ? Promise.reject("phone sudah digunakan") : true;
+        })
 ];
 
 exports.editUserByIdValidator = [
@@ -35,7 +34,7 @@ exports.editUserByIdValidator = [
             return Promise.reject("gender harus terisi 'M' atau 'F'");
         };
         // Validasi apakah record user dgn id tsb ada
-        // dan apakah nama yg akan diganti sdh terpakai atau blm.
+        // dan apakah phone yg akan diganti sdh terpakai atau blm.
         const where = {
             where: Sequelize.or(
                 { id: id }
@@ -46,7 +45,6 @@ exports.editUserByIdValidator = [
         if (user.length > 1) {
             return Promise.reject("phone sudah digunakan");
         }
-        console.log([id, typeof id, user[0].dataValues.id, typeof user[0].dataValues.id])
         if (user.length < 1 || user[0].dataValues.id != id) {
             return Promise.reject(`User ID ${id} tidak ditemukan`);
         }
