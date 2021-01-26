@@ -18,7 +18,11 @@ module.exports = (sequelize, DataTypes) => {
       , autoIncrement: true
     }
     , users_id: DataTypes.INTEGER(11)
-    , books_id: DataTypes.INTEGER(11)
+    , books_id: {
+      type: DataTypes.INTEGER(11)
+      , references: 'books' // <<< Note, its table's name, not object name
+      , referencesKey: 'id' // <<< Note, its a column name
+    }
     , qty: DataTypes.INTEGER(11)
     , order_at: DataTypes.DATE
   }, {
