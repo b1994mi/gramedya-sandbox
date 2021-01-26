@@ -1,10 +1,37 @@
 const { success, failed } = require("../config/response")
-const { users, books } = require('../models')
+const { users, books, type_books, orders } = require('../models')
 
 exports.getUsers = async (req, res) => {
     try {
         const data = await users.findAll({
             // include: { model: books }
+        });
+        return res.json(success({
+            message: "data berhasil diterima", data
+        }));
+    } catch (error) {
+        return res.json(
+            failed({ message: "SALAH SISTEM", data: error })
+        );
+    }
+};
+
+exports.getUsersJoinBooks = async (req, res) => {
+    try {
+        const data = await users.findAll({
+            attributes: ['name', 'phone']
+            , include: {
+                model: orders
+                , attributes: ['qty']
+                , include: {
+                    model: books
+                    , attributes: ['name']
+                    , include: {
+                        model: type_books
+                        , attributes: ['name']
+                    }
+                }
+            }
         });
         return res.json(success({
             message: "data berhasil diterima", data
