@@ -1,6 +1,7 @@
 const express = require('express')
 const { sequelize } = require('./models')
-const userRoutes = require("./routes/userRoutes");
+const userRoutes = require("./routes/userRoutes")
+const bookRoutes = require("./routes/bookRoutes")
 
 const app = express()
 const port = 8080
@@ -10,6 +11,8 @@ const port = 8080
 app.use(express.json())
 
 app.use(userRoutes)
+
+app.use(bookRoutes)
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
