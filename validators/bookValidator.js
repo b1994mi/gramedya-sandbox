@@ -29,7 +29,7 @@ exports.postBookValidator = [
         }
         // Cek nama sudah ada atau blm, sengaja terakhir spy menghemat db read
         const bodyName = await books.findOne({ where: { name: body.name } });
-        if (bodyName === null) {
+        if (bodyName !== null) {
             return Promise.reject("Book name sudah digunakan");
         }
         return true;
