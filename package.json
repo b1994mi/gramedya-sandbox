@@ -12,6 +12,7 @@
     "express": "^4.17.1",
     "express-validator": "^6.9.2",
     "mysql2": "^2.2.5",
+    "pg": "^8.5.1",
     "sequelizer": "^1.1.4"
   }
 }
