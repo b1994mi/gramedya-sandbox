@@ -9,7 +9,7 @@ const port = process.env.PORT || 8000
 
 // It is important to make sure that you sync with no accosiation
 // in the models so that there will be no conflict on FK/Index.
-// sequelize.sync()
+sequelize.sync()
 
 app.use(express.json())
 
