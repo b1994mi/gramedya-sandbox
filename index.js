@@ -8,8 +8,9 @@ const app = express()
 const port = process.env.PORT || 8000
 
 // It is important to make sure that you sync with no accosiation
-// in the models so that there will be no conflict on FK/Index.
-sequelize.sync()
+// in the models so that there will be no conflict on FK/Index in MySQL.
+// BUT, it seems that PostgreSQL is okay with those associations.
+// sequelize.sync()
 
 app.use(express.json())
 
