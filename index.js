@@ -5,7 +5,7 @@ const bookRoutes = require("./routes/bookRoutes")
 const orderRoutes = require("./routes/orderRoutes")
 
 const app = express()
-const port = 8080
+const port = process.env.PORT || 8000
 
 // It is important to make sure that you sync with no accosiation
 // in the models so that there will be no conflict on FK/Index.
