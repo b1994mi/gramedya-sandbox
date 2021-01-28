@@ -20,3 +20,4 @@ This app is deployed on Heroku + PostgreSQL as the add-on [here](https://lit-bas
 - Validation on `POST "/transactions"` not yet making sure the `users_id` or `books_id` is present in `users` tabel or `books` table respectively.
 - PostgreSQL autoincrement does not automatically figure out the last existing row's id. I had to `POST` a lot up to an id that's not been used to successfully `INSERT INTO` any table.
 - Not yet implemented routes/endpoints for getting and posting `type_books`.
+- Better for me to `npm uninstall mysql2` to remove MySQL dependencies and use PostgreSQL on local env. Don't forget to use `.env` file and add it to `.gitignore` as a best practice.
